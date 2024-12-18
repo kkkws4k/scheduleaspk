@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Расписание занятий</title>
+    <style>
+        img {
+            width: 10%;
+            height: 10%;
+            cursor: pointer;
+        }
+        
+        body {
+            background-color: #1e1e1e;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        
+        h1 {
+            margin-top: 20px;
+        }
+        
+        .group-filter {
+            margin: 20px 0;
+        }
+        
+        select,
+        input,
+        button {
+            padding: 8px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+        }
+        
+        #loading {
+            display: none;
+            font-size: 1.2em;
+            color: yellow;
+        }
+        
+        table {
+            margin: 0 auto;
+            border-collapse: collapse;
+            width: 80%;
+            background-color: #fff;
+            color: #000;
+        }
+        
+        th,
+        td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+        
+        th {
+            background-color: #f4f4f4;
+        }
+        
+        .add-group-form {
+            margin: 30px auto;
+            background-color: #fff;
+            color: #000;
+            border-radius: 10px;
+            padding: 20px;
+            width: 50%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="icon">
+        <img src="../images/icon.png" onclick="goToPage()">
+
+
+    </div>
+
+    <h1>Расписание занятий</h1>
+
+    <div class="group-filter">
+        <label for="group">Выберите группу:</label>
+        <select id="group">
+            <option value="" disabled selected>-- Выберите группу --</option>
+        </select>
+    </div>
+
+    <div id="loading">Загрузка...</div>
+
+    <table id="schedule">
+        <thead>
+            <tr>
+                <th>Пара</th>
+                <th>Время</th>
+                <th>Преподаватель</th>
+                <th>Предмет</th>
+                <th>Кабинет</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <div class="add-group-form">
+        <h2>Добавить расписание</h2>
+        <form id="groupForm">
+            <input type="text" id="newGroup" placeholder="Название группы" required />
+            <input type="number" id="lessonNumber" placeholder="Номер пары" required />
+            <input type="text" id="time" placeholder="Время" required />
+            <input type="text" id="teacher" placeholder="Преподаватель" required />
+            <input type="text" id="subject" placeholder="Предмет" required />
+            <input type="text" id="room" placeholder="Кабинет" required />
+            <button type="submit">Добавить</button>
+        </form>
+    </div>
+
+    <script>
+        const scheduleTable = document.getElementById('schedule').querySelector('tbody');
+        const groupSelect = document.getElementById('group');
+        const loadingIndicator = document.getElementById('loading');
+
+        function goToPage() {
+            window.location.href = "../index.html#";
+        }
+
+        function loadGroupsAndSchedule() {
+            loadingIndicator.style.display = 'block';
+            fetch('http://localhost:3000/schedule')
+                .then(response => response.json())
+                .then(data => {
+                    groupSelect.innerHTML = '<option value="" disabled selected>-- Выберите группу --</option>';
+                    Object.keys(data).forEach(group => {
+                        const option = document.createElement('option');
+                        option.value = group;
+                        option.textContent = group;
+                        groupSelect.appendChild(option);
+                    });
+
+                    groupSelect.addEventListener('change', () => loadSchedule(data[groupSelect.value]));
+                    loadingIndicator.style.display = 'none';
+                });
+        }
+
+        function loadSchedule(lessons) {
+            scheduleTable.innerHTML = '';
+            if (Array.isArray(lessons)) {
+                lessons.forEach(lesson => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${lesson.пара}</td>
+                        <td>${lesson.время}</td>
+                        <td>${lesson.преподаватель}</td>
+                        <td>${lesson.предмет}</td>
+                        <td>${lesson.кабинет}</td>
+                    `;
+                    scheduleTable.appendChild(row);
+                });
+            }
+        }
+
+        document.getElementById('groupForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const newGroup = document.getElementById('newGroup').value;
+            const lessonNumber = document.getElementById('lessonNumber').value;
+            const time = document.getElementById('time').value;
+            const teacher = document.getElementById('teacher').value;
+            const subject = document.getElementById('subject').value;
+            const room = document.getElementById('room').value;
+
+            fetch('http://localhost:3000/schedule', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        group: newGroup,
+                        lessonNumber,
+                        time,
+                        teacher,
+                        subject,
+                        room
+                    })
+                })
+                .then(response => response.json())
+                .then(() => {
+                    alert('Данные успешно добавлены!');
+                    loadGroupsAndSchedule();
+                });
+        });
+
+        loadGroupsAndSchedule();
+    </script>
+</body>
+
+</html>

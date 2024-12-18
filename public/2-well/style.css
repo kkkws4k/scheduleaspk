@@ -1,0 +1,109 @@
+/* General styles */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+
+/* Header */
+
+header {
+    background-color: #4a76a8;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+header h2 {
+    margin: 0;
+}
+
+
+/* Search bar */
+
+.search-bar {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.search-bar input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 60%;
+    max-width: 400px;
+}
+
+
+/* Categories */
+
+.categories {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.category {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    width: calc(33.333% - 20px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.category:hover {
+    transform: scale(1.02);
+}
+
+.category h3 {
+    margin-top: 0;
+    border-bottom: 2px solid #4a76a8;
+    padding-bottom: 5px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 5px;
+}
+
+
+/* Footer */
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+
+/* Responsive design */
+
+@media (max-width: 1024px) {
+    .category {
+        width: calc(50% - 20px);
+    }
+}
+
+@media (max-width: 768px) {
+    .search-bar input {
+        width: 80%;
+    }
+    .category {
+        width: 100%;
+    }
+}

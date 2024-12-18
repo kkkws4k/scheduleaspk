@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Панель администратора</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Панель администратора</h1>
+
+    <form id="scheduleForm">
+        <label for="group">Группа:</label>
+        <input type="text" id="group" placeholder="Пример: ИС22-3A" required><br><br>
+
+        <label for="lesson">Пара:</label>
+        <input type="number" id="lesson" min="1" placeholder="Номер пары" required><br><br>
+
+        <label for="time">Время:</label>
+        <input type="text" id="time" placeholder="Пример: 8:00-9:30" required><br><br>
+
+        <label for="teacher">Преподаватель:</label>
+        <input type="text" id="teacher" placeholder="Имя преподавателя" required><br><br>
+
+        <label for="subject">Предмет:</label>
+        <input type="text" id="subject" placeholder="Название предмета" required><br><br>
+
+        <label for="room">Кабинет:</label>
+        <input type="text" id="room" placeholder="Пример: 400 ГК" required><br><br>
+
+        <button type="submit">Добавить/Обновить расписание</button>
+    </form>
+
+    <script>
+        const form = document.getElementById('scheduleForm');
+
+        form.addEventListener('submit', async(e) => {
+            e.preventDefault();
+            const group = document.getElementById('group').value;
+            const lesson = document.getElementById('lesson').value;
+            const time = document.getElementById('time').value;
+            const teacher = document.getElementById('teacher').value;
+            const subject = document.getElementById('subject').value;
+            const room = document.getElementById('room').value;
+
+            const newSchedule = {
+                group,
+                lesson: parseInt(lesson),
+                time,
+                teacher,
+                subject,
+                room
+            };
+
+            try {
+                const response = await fetch('/api/schedule', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(newSchedule)
+                });
+                const result = await response.json();
+                alert(result.message);
+            } catch (error) {
+                console.error('Ошибка:', error);
+            }
+        });
+    </script>
+</body>
+
+</html>

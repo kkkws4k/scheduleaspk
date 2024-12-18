@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добавление группы и расписания</title>
+    <style>
+        body {
+            background-color: #1e1e1e;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        
+        h1 {
+            margin: 20px 0;
+        }
+        
+        .form-container {
+            margin: 30px auto;
+            background-color: #fff;
+            color: #000;
+            padding: 20px;
+            width: 50%;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        label {
+            margin: 10px 0 5px;
+            text-align: left;
+        }
+        
+        input,
+        button {
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        
+        button {
+            background-color: #665cff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background-color: #574bdc;
+        }
+        
+        a {
+            color: #665cff;
+            text-decoration: none;
+            margin-top: 20px;
+            display: inline-block;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Добавление группы и расписания</h1>
+
+    <!-- Форма для добавления данных -->
+    <div class="form-container">
+        <form id="groupForm">
+            <label for="newGroup">Название группы:</label>
+            <input type="text" id="newGroup" placeholder="Например: ИС22-3А" required />
+
+            <label for="lessonNumber">Номер пары:</label>
+            <input type="number" id="lessonNumber" placeholder="1, 2, 3..." required />
+
+            <label for="time">Время:</label>
+            <input type="text" id="time" placeholder="08:00 - 09:30" required />
+
+            <label for="teacher">Преподаватель:</label>
+            <input type="text" id="teacher" placeholder="ФИО преподавателя" required />
+
+            <label for="subject">Предмет:</label>
+            <input type="text" id="subject" placeholder="Название предмета" required />
+
+            <label for="room">Кабинет:</label>
+            <input type="text" id="room" placeholder="ГК 400" required />
+
+            <button type="submit">Добавить</button>
+        </form>
+        <a href="index.html">Вернуться к расписанию</a>
+    </div>
+
+    <script>
+        // Обработчик формы для добавления данных
+        document.getElementById('groupForm').addEventListener('submit', async(e) => {
+            e.preventDefault();
+
+            // Получаем данные из формы
+            const newGroup = document.getElementById('newGroup').value;
+            const lessonNumber = document.getElementById('lessonNumber').value;
+            const time = document.getElementById('time').value;
+            const teacher = document.getElementById('teacher').value;
+            const subject = document.getElementById('subject').value;
+            const room = document.getElementById('room').value;
+
+            const newLesson = {
+                "пара": lessonNumber,
+                "время": time,
+                "преподаватель": teacher,
+                "предмет": subject,
+                "кабинет": room
+            };
+
+            try {
+                // Отправляем данные на сервер (POST-запрос)
+                const response = await fetch('/add-schedule', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        group: newGroup,
+                        lesson: newLesson
+                    })
+                });
+
+                if (response.ok) {
+                    alert('Данные успешно добавлены!');
+                    document.getElementById('groupForm').reset();
+                } else {
+                    alert('Ошибка при добавлении данных.');
+                }
+            } catch (error) {
+                console.error('Ошибка:', error);
+                alert('Не удалось добавить данные. Проверьте соединение с сервером.');
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Расписание студентов</title>
+    <link rel="stylesheet" href="../styles/style.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #fff;
+            color: #fff;
+        }
+        
+        header h2 {
+            margin: 0;
+        }
+        
+        header nav a {
+            text-decoration: none;
+            color: #333;
+            margin: 0 10px;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        
+        header nav a:hover {
+            color: #cde1f8;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .search-bar {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .search-bar input {
+            padding: 10px;
+            width: 60%;
+            max-width: 400px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        
+        .categories {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+        
+        .category {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px 20px;
+            width: calc(33.333% - 20px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .category:hover {
+            transform: scale(1.03);
+        }
+        
+        .category h3 {
+            margin-top: 0;
+            border-bottom: 2px solid indianred;
+            padding-bottom: 5px;
+        }
+        
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        ul li {
+            padding: 5px 0;
+            font-size: 14px;
+        }
+        
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            margin-top: 20px;
+        }
+        
+        @media (max-width: 1024px) {
+            .category {
+                width: calc(50% - 20px);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .search-bar input {
+                width: 80%;
+            }
+            .category {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div>
+
+            <img src="../images/icon.png" onclick="goToPage()">
+
+        </div>
+        <nav>
+            <a href="../index.html" onclick="goToPage()">Главная</a>
+            <a href="#">Расписание</a>
+            <a href="syte/index.html">Про сайт</a>
+        </nav>
+    </header>
+
+    <h1>Введите имя группы</h1>
+    <div class="search-bar">
+        <input type="text" placeholder="Поиск группы...">
+    </div>
+
+    <div class="categories">
+        <div class="category">
+            <h3>1 курс</h3>
+            <ul>
+                <li><a href="../1-well/index.html">ИС24-1</a></li>
+                <li><a href="../1-well/index.html">П24-1А</a></li>
+                <li><a href="../1-well/index.html">П24-1Б</a></li>
+                <li><a href="../1-well/index.html">П24-1В</a></li>
+                <li><a href="../1-well/index.html">П24-1Г</a></li>
+                <li><a href="../1-well/index.html">П24-1Д</a></li>
+                <li><a href="../1-well/index.html">П24-1Г</a></li>
+                <li><a href="../1-well/index.html">П24-1ЖК</a></li>
+                <li><a href="../1-well/index.html">РЭТ24-1</a></li>
+            </ul>
+        </div>
+        <div class="category">
+            <h3>2 курс</h3>
+            <ul>
+                <li><a href="../1-well/index.html">Т23-2А</a></li>
+                <li><a href="../1-well/index.html">Т23-2Б</a></li>
+                <li><a href="../1-well/index.html">Т23-2В</a></li>
+                <li><a href="../1-well/index.html">эвм-23-2А</a></li>
+                <li><a href="../1-well/index.html">эвм-23-2Б</a></li>
+                <li><a href="../1-well/index.html">эвм-23-2В</a></li>
+                <li><a href="../1-well/index.html">ИС23-2А</a></li>
+                <li><a href="../1-well/index.html">ИС23-2Б</a></li>
+                <li><a href="../1-well/index.html">ТМ23-2</a></li>
+                <li><a href="../1-well/index.html">П23-2А</a></li>
+                <li><a href="../1-well/index.html">П23-2Б</a></li>
+                <li><a href="../1-well/index.html">П23-2В</a></li>
+                <li><a href="../1-well/index.html">П23-2Г</a></li>
+                <li><a href="../1-well/index.html">П23-2Д</a></li>
+                <li><a href="../1-well/index.html">П23-2Е</a></li>
+                <li><a href="../1-well/index.html">П23-2ЖК</a></li>
+                <li><a href="../1-well/index.html">РЭТ-2ЖК</a></li>
+            </ul>
+        </div>
+        <div class="category">
+            <h3>3 курс</h3>
+            <ul>
+                <li><a href="../1-well/index.html">Т22-3А</a></li>
+                <li><a href="../1-well/index.html">Т22-3Б</a></li>
+                <li><a href="../1-well/index.html">ЭВМ22-3А</a></li>
+                <li><a href="../1-well/index.html">ЭВМ22-3Б</a></li>
+                <li><a href="../1-well/index.html">ЭВМ22-3В</a></li>
+                <li><a href="../1-well/index.html">ЭВМ22-3Г</a></li>
+                <li><a href="../1-well/index.html">ЭВМ22-3КОГ</a></li>
+                <li><a href="../1-well/index.html">ТЗИ22-3</a></li>
+                <li><a href="../1-well/index.html">ИС22-3А</a></li>
+                <li><a href="../1-well/index.html">ИС22-3Б</a></li>
+                <li><a href="../1-well/index.html">ТМ22-3</a></li>
+                <li><a href="../1-well/index.html">П22-3А</a></li>
+                <li><a href="../1-well/index.html">П22-3Б</a></li>
+                <li><a href="../1-well/index.html">П22-3В</a></li>
+                <li><a href="../1-well/index.html">П22-3Г</a></li>
+                <li><a href="../1-well/index.html">П22-3Д</a></li>
+                <li><a href="../1-well/index.html">П22-3У</a></li>
+                <li><a href="../1-well/index.html">П22-3ЕК</a></li>
+                <li><a href="../1-well/index.html">П22-3ИК</a></li>
+                <li><a href="../1-well/index.html">П22-3ЖК</a></li>
+                <li><a href="../1-well/index.html">П22-3ЗК</a></li>
+                <li><a href="../1-well/index.html">РЭТ22-3</a></li>
+                <li><a href="../1-well/index.html">С22-3</a></li>
+            </ul>
+        </div>
+        <div class="category">
+            <h3>4 курс</h3>
+            <ul>
+                <li><a href="../1-well/index.html">Т21-4А</a></li>
+                <li><a href="../1-well/index.html">Т21-4Б</a></li>
+                <li><a href="../1-well/index.html">Т21-4В</a></li>
+                <li><a href="../1-well/index.html">Т21-4К</a></li>
+                <li><a href="../1-well/index.html">ТЗИ21-4</a></li>
+                <li><a href="../1-well/index.html">ИС21-4А</a></li>
+                <li><a href="../1-well/index.html">ИС21-4Б</a></li>
+                <li><a href="../1-well/index.html">ИС21-4В</a></li>
+                <li><a href="../1-well/index.html">ИС21-4ГК</a></li>
+                <li><a href="../1-well/index.html">ТМ21-4</a></li>
+                <li><a href="../1-well/index.html">П21-4А</a></li>
+                <li><a href="../1-well/index.html">П21-4Б</a></li>
+                <li><a href="../1-well/index.html">П21-4ГК</a></li>
+                <li><a href="../1-well/index.html">П21-4ЕК</a></li>
+                <li><a href="../1-well/index.html">П21-4ВК</a></li>
+                <li><a href="../1-well/index.html">П21-4ДК</a></li>
+                <li><a href="../1-well/index.html">П21-4КОГ</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2024 Polytech College | Все права защищены</p>
+    </footer>
+    <script>
+        function goToPage() {
+            window.location.href = "../index.html#";
+        }
+    </script>
+</body>
+
+</html>
